@@ -1,27 +1,17 @@
-import Profile from "./Profile/Profile";
-import userData from "../userData.json";
-import friends from "../friends.json"
-import FriendList from "./FriendList/FriendList"
-import TransactionHistory from "./TransactionHistory/TransactionHistory";
-import transactions from "../transactions.json"
+import { useEffect, useState } from "react"
+import Articles from "./Articles/Articles"
+import axios from "axios"
 
 const App = () => {
+  const [articles, setArticles] = useState([])
+  useEffect(() => {
+    axios.get('https://hn.algolia.com/api/v1/search?query=react').then(res => setArticles(res.data.hits));
+  }, []);
   return (
     <div>
-      <Profile 
-        name={userData.username}
-        tag={userData.tag}
-        location={userData.location}
-        img={userData.avatar}
-        stats={userData.stats}
-      />
-      <FriendList 
-        friends={friends}/>
-      <TransactionHistory
-        items={transactions}/>
+      <Articles articles = {articles}/>
     </div>
-      
   )
 }
 
-export default App;
+export default App
