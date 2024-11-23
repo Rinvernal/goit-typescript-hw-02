@@ -4,7 +4,9 @@ const Articles = ({articles}) => {
     <div>
       <ul>
         {articles.map(post => 
-          <li key={post.objectID}>{post.title}</li>
+          <li key={post.objectID}>
+            <a href={post.url}>{post.title}</a>
+          </li>
         )}
       </ul>
       </div>

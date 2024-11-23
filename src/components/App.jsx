@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react"
 import Articles from "./Articles/Articles"
-import axios from "axios"
+
+import { featchArticles } from "../services/api";
+import Loader from "./Loader/Loader";
 
 const App = () => {
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get('https://hn.algolia.com/api/v1/search?query=react').then(res => setArticles(res.data.hits));
-      setArticles(response.data.hits)
-    }
-    getData()
+    const getData = async () => { 
+      try {
+        setIsLoading(true)
+        const { hits } = await featchArticles();
+        setIsLoading(false)
+        setArticles(hits);
+      }
+     catch (error) {
+      console.log(error)
+    }}
+    getData();
   }, []);
   return (
     <div>
+      {isLoading && <Loader />}
       <Articles articles = {articles}/>
     </div>
   )
