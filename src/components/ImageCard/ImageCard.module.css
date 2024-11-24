@@ -1,0 +1,17 @@
+.box{
+  background-color: #f8dfff6a;
+  border: 3px rgba(66, 58, 70, 0.749) solid;
+  border-radius: 10px;
+  transition: transform 0.3s ease; 
+}
+.box:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgb(221, 48, 255); 
+}
+.image{
+  height: 200px; 
+  object-fit: cover; 
+  object-position: center;
+  border-radius: 10px; 
+}
+

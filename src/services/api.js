@@ -1,6 +1,14 @@
 import axios from "axios"
 
-export const featchArticles = async(query) => {
-  const response = await axios.get(`https://hn.algolia.com/api/v1/search?query=${query}`)
+axios.defaults.baseURL = 'https://api.unsplash.com'
+export const featchArticles = async(query, page) => {
+  const response = await axios.get(`/search/photos`, {
+    params: {
+      query,
+      page,
+      per_page: 20,
+      client_id: 'iKCclFhzYrQiEeAiJrETchEs74nNCF07M6aMDGmkO5w',
+    }
+  })
   return response.data;
 }

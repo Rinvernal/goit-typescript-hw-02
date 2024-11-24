@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-
+import s from "./SearchBar.module.css"
 const SearchBar = ({onChangeQuery}) => {
   const initialValues = {
     query: ''
@@ -9,11 +9,16 @@ const SearchBar = ({onChangeQuery}) => {
     onChangeQuery(values.query)
   }
   return (
-    <div>
+    <div className={s.box}>
       <Formik initialValues={initialValues} onSubmit={handelsubmit}>
         <Form>
-          <Field name='query'/>
-          <button type='submit'>Search</button>
+          <Field name='query' 
+            autoComplete="off" 
+            autoFocus 
+            placeholder="Search images and photos"
+            className={s.input}
+          />
+          <button className={s.submit} type='submit'>Search</button>
         </Form>
       </Formik>
     </div>
