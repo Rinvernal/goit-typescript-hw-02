@@ -1,9 +1,9 @@
 import Modal from "react-modal";
-import PropTypes from "prop-types";
 import s from "./ImageModal.module.css";
+import { ImageModalProps } from "../../types";
 
 
-const ImageModal = ({ isOpen, onClose, image }) => {
+const ImageModal : React.FC <ImageModalProps> = ({ isOpen, onClose, image }) => {
   if (!image) return null;
 
   return (
@@ -25,12 +25,6 @@ const ImageModal = ({ isOpen, onClose, image }) => {
       <p>Author: {image.user.name || "Unknown"}</p>
     </Modal>
   );
-};
-
-ImageModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  image: PropTypes.object,
 };
 
 export default ImageModal;

@@ -1,8 +1,10 @@
 import axios from "axios"
+import { APIResponse } from "../types";
+
 
 axios.defaults.baseURL = 'https://api.unsplash.com'
-export const featchArticles = async(query, page) => {
-  const response = await axios.get(`/search/photos`, {
+export const featchArticles = async(query:string, page:number):Promise<APIResponse> => {
+  const response = await axios.get<APIResponse>(`/search/photos`, {
     params: {
       query,
       page,

@@ -1,10 +1,13 @@
 import { Field, Form, Formik } from "formik"
 import s from "./SearchBar.module.css"
-const SearchBar = ({onChangeQuery}) => {
-  const initialValues = {
+import { FormValue, SearchBarProps } from "../../types"
+
+
+const SearchBar : React.FC <SearchBarProps> = ({onChangeQuery}) => {
+  const initialValues : FormValue = {
     query: ''
   }
-  const handelsubmit = (values) => {
+  const handelsubmit = (values : FormValue) => {
     console.log(values)
     onChangeQuery(values.query)
   }

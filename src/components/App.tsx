@@ -8,14 +8,16 @@ import toast from "react-hot-toast";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import ImageModal from "./ImageModal/ImageModal";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
+import { APIResponse, Image } from "../types";
+
 
 const App = () => {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const [query, setQuery] = useState('')
-  const [page, setPage] = useState(1)
-  const [nbPages, setNbPages] = useState(1)
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false)
+  const [query, setQuery] = useState<string>('')
+  const [page, setPage] = useState<number>(1)
+  const [nbPages, setNbPages] = useState<number>(1)
 
   useEffect (() => {
     if (page > nbPages) {
@@ -32,7 +34,7 @@ const App = () => {
       try {
         setIsLoading(true)
         setIsError(false)
-        const { results, total_pages } = await featchArticles(query, page);
+        const { results, total_pages }: APIResponse = await featchArticles(query, page);
         setImages( prevImages => {
           const newImages = results.filter(
             newImage => !prevImages.some(image => image.id === newImage.id)
@@ -52,21 +54,21 @@ const App = () => {
   }
     getData();
   }, [query, page]);
-  const handleChangeQuery = (query) => {
+  const handleChangeQuery = (query:string):void => {
     setImages([])
     setQuery(query)
     setPage(1)
   }
 
-  const [modalImage, setModalImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState<Image|null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const openModal = (image) => {
+  const openModal = (image: Image):void => {
     setModalImage(image);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = ():void => {
     setModalImage(null);
     setIsModalOpen(false);
   };
